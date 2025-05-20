@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selamat Ulang Tahun, Sayang!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Quicksand', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 52px;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 8px #f06292;
+      font-family: 'Pacifico', cursive;
+    }
+
+    p {
+      font-size: 22px;
+      max-width: 700px;
+      margin: 20px auto;
+      line-height: 1.8;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .love {
+      font-size: 90px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    button {
+      background: #ff6f91;
+      color: #fff;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 8px rgba(255,111,145,0.6);
+    }
+
+    button:hover {
+      background: #ff4e72;
+      box-shadow: 0 6px 12px rgba(255,78,114,0.8);
+    }
+
+    #pesanRahasia {
+      display: none;
+      margin-top: 30px;
+      font-size: 24px;
+      color: #fff;
+      font-weight: 600;
+      text-shadow: 2px 2px 5px rgba(240,128,128,0.7);
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    /* Balon */
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 50px;
+      height: 70px;
+      background-color: #ff6f91;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.8;
+      animation-name: floatUp;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 22px;
+      width: 6px;
+      height: 15px;
+      background: #555;
+      border-radius: 2px;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-30px) scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Selamat Ulang Tahun, Sayang! 🎉</h1>
+  <div class="love">❤️</div>
+  <p>
+    Di hari spesial ini, aku cuma mau bilang betapa berartinya kamu buat aku.  
+    Terima kasih udah selalu ada, nemenin aku di setiap momen senang dan sedih.  
+    Kamu bukan cuma pacar, tapi juga sahabat dan semangat hidup aku.
+  </p>
+  <p>
+    Semoga semua keinginan kamu terkabul, rezekimu makin lancar, dan kebahagiaan selalu ada di sisimu.  
+    Tetap jadi kamu yang manis dan hangat kayak biasanya ya!  
+  </p>
+  <p>Aku sayang kamu ❤️</p>
+
+  <button onclick="mulaiMusikDanTampilkanPesan()">Klik Aku untuk Pesan Rahasia 💌</button>
+
+  <div id="pesanRahasia">
+    Aku sayang kamu lebih dari apapun! Semoga hari ulang tahunmu penuh kebahagiaan dan cinta ❤️🎂✨
+  </div>
+
+  <div class="footer">Dari aku, yang selalu sayang kamu ✨</div>
+
+  <!-- Musik latar tanpa autoplay -->
+  <audio id="musik" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_52cce35b25.mp3?filename=soft-ambient-12118.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function mulaiMusikDanTampilkanPesan() {
+      const audio = document.getElementById('musik');
+      const pesan = document.getElementById('pesanRahasia');
+
+      if (pesan.style.display === 'block') {
+        pesan.style.display = 'none';
+        audio.pause();
+      } else {
+        pesan.style.display = 'block';
+        audio.volume = 0.3;
+        audio.play().catch(() => {
+          console.log("Musik autoplay diblokir, tunggu klik user");
+        });
+      }
+    }
+
+    // Fungsi buat bikin balon random di halaman
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      const colors = ['#ff6f91', '#ff9671', '#ffc75f', '#f9f871', '#a0e7e5', '#b4f8c8', '#fbeaff'];
+      balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.animationDuration = (5 + Math.random() * 5) + 's';
+      balloon.style.opacity = 0.8;
+
+      document.body.appendChild(balloon);
+
+      setTimeout(() => {
+        balloon.remove();
+      }, parseFloat(balloon.style.animationDuration) * 1000);
+    }
+
+    setInterval(createBalloon, 600);
+  </script>
+
+</body>
+</html>
